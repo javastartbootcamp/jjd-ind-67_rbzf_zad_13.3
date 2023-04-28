@@ -15,17 +15,13 @@ public class Main {
         String fileNameCurrencies = "currencies.csv";
         File fileProducts = new File(fileNameProducts);
         File fileCurrencies = new File(fileNameCurrencies);
-        Scanner scannerProducts = null;
-        Scanner scannerCurrencies = null;
-        try {
-            scannerProducts = new Scanner(fileProducts);
-            scannerCurrencies = new Scanner(fileCurrencies);
 
+        try {
             BigDecimal sum = new BigDecimal(0);
             BigDecimal maximum = new BigDecimal(0);
             BigDecimal minimum = new BigDecimal(1000);
-            List<Product> listProducts = readProductsFromFile(fileNameProducts, scannerProducts);
-            List<Currency> listCurrencies = readCurrenciesFromFile(fileNameCurrencies, scannerCurrencies);
+            List<Product> listProducts = readProductsFromFile(fileNameProducts);
+            List<Currency> listCurrencies = readCurrenciesFromFile(fileNameCurrencies);
             Product productMax = null;
             Product productMin = null;
 
@@ -55,8 +51,9 @@ public class Main {
         }
     }
 
-    private static List<Currency> readCurrenciesFromFile(String fileName, Scanner scanner) {
+    private static List<Currency> readCurrenciesFromFile(String fileName) throws FileNotFoundException {
         File file = new File(fileName);
+        Scanner scanner = new Scanner(file);
         List<Currency> listCurrencies = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
@@ -67,8 +64,9 @@ public class Main {
         return listCurrencies;
     }
 
-    private static List<Product> readProductsFromFile(String fileName, Scanner scanner) {
+    private static List<Product> readProductsFromFile(String fileName) throws FileNotFoundException {
         File file = new File(fileName);
+        Scanner scanner = new Scanner(file);
         List<Product> listProducts = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
